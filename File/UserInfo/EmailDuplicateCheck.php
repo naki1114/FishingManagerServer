@@ -4,6 +4,22 @@
 
   if ($connect) {
     // 연결 성공
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $id = $_POST['id'];
+    
+      if ($id) {
+        $duplicateCheckQuery = "SELECT * FROM userInfo WHERE id='$id'";
+        $result = mysqli_query($connect, $duplicateCheckQuery);
+  
+        if (mysqli_num_rows($result) > 0) {  
+          echo "unusableID";
+        }
+        else {
+          echo "usableID";
+        }
+        mysqli_close($connect);
+      }
+    }
   }
   else {
     // 연결 실패
