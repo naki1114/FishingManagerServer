@@ -4,6 +4,22 @@
 
   if ($connect) {
     // 연결 성공
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $nickname = $_POST['nickname'];
+    
+      if ($nickname) {
+        $duplicateCheckQuery = "SELECT * FROM userInfo WHERE nickname='$nickname'";
+        $result = mysqli_query($connect, $duplicateCheckQuery);
+  
+        if (mysqli_num_rows($result) > 0) {  
+          echo "unusableNickname";
+        }
+        else {
+          echo "usableNickname";
+        }
+        mysqli_close($connect);
+      }
+    }
   }
   else {
     // 연결 실패
