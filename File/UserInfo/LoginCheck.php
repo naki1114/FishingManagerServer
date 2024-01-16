@@ -8,11 +8,13 @@
       $id = $_POST['id'];
       $password = $_POST['password'];
 
-      $loginQuery = "SELECT * FROM userInfo WHERE id='$id' AND password='$password';";
-      $result= mysqli_query($connect, $loginQuery);
+      $loginQuery = "SELECT nickname FROM userInfo WHERE id='$id' AND password='$password';";
+      $result = mysqli_query($connect, $loginQuery);
 
-      if (mysqli_num_rows($result) == 1) {  
-        echo "successLogin";
+      if (mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_array($result);
+        $nickname = $row[0];
+        echo "successLogin $nickname";
       }
       else { 
         echo "failureLogin";
