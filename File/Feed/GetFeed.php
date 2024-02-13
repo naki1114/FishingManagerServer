@@ -4,7 +4,7 @@
 
   if ($connect) {
     // 연결 성공
-    // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       
       // ArrayList<Feed>
       $getFeedQuery = "SELECT nickname, num, title, content, picture, viewCount, date FROM feed;";
@@ -25,7 +25,7 @@
 
       echo json_encode($arrayFeed, JSON_UNESCAPED_UNICODE);
 
-    // }
+    }
   }
   else {
     // 연결 실패
