@@ -21,6 +21,8 @@
                                      "date" => $row[6]));
       }
 
+      $arrayFeed = array_reverse($arrayFeed);
+
       echo json_encode($arrayFeed, JSON_UNESCAPED_UNICODE);
 
     // }
