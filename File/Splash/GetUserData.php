@@ -4,8 +4,8 @@
 
   if ($connect) {
     // 연결 성공
-    // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      $nickname = $_GET['nickname'];
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $nickname = $_POST['nickname'];
 
       // UserInfo
       $getUserInfoQuery = "SELECT checkingFishCount, checkingFishTicket, removeAdTicket FROM userInfo WHERE nickname='$nickname';";
@@ -63,7 +63,7 @@
                              "collection" => $arrayCollection,
                              "history" => $arrayHistory,
                              "feed" => $arrayFeed), JSON_UNESCAPED_UNICODE);
-    // }
+    }
   }
   else {
     // 연결 실패
