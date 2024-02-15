@@ -4,8 +4,8 @@
 
   if ($connect) {
     // 연결 성공
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      $nickname = $_POST['nickname'];
+    // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $nickname = $_GET['nickname'];
 
       // UserInfo
       $getUserInfoQuery = "SELECT checkingFishCount, checkingFishTicket, removeAdTicket FROM userInfo WHERE nickname='$nickname';";
@@ -48,22 +48,22 @@
       $arrayFeed = array();
 
       while ($row = mysqli_fetch_array($resultFeed)) {
-        array_push($arrayFeed, array("nickname" => $row[0],
+        array_push($arrayFeed, array("viewCount" => $row[5],
                                      "feedNum" => $row[1],
                                      "title" => $row[2],
                                      "content" => $row[3],
                                      "feedImage" => $row[4],
-                                     "viewCount" => $row[5],
+                                     "nickname" => $row[0],
                                      "date" => $row[6]));
       }
 
-      $arrayFeed = array_reverse($arrayFeed);
+      rsort($arrayFeed);
 
       echo json_encode(array("userInfo" => $userInfo,
                              "collection" => $arrayCollection,
                              "history" => $arrayHistory,
                              "feed" => $arrayFeed), JSON_UNESCAPED_UNICODE);
-    }
+    // }
   }
   else {
     // 연결 실패
