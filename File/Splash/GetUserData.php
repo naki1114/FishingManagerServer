@@ -8,12 +8,15 @@
       $nickname = $_POST['nickname'];
 
       // UserInfo
-      $getUserInfoQuery = "SELECT checkingFishCount, checkingFishTicket, removeAdTicket FROM userInfo WHERE nickname='$nickname';";
+      $getUserInfoQuery = "SELECT nickname, profileImage, checkingFishCount, checkingFishTicket, removeAdTicket, type FROM userInfo WHERE nickname='$nickname';";
       $resultUserInfo = mysqli_query($connect, $getUserInfoQuery);
       $row = mysqli_fetch_array($resultUserInfo);
-      $userInfo = array("checkingFishCount" => $row[0],
-                        "checkingFishTicket" => $row[1],
-                        "removeAdTicket" => $row[2]);
+      $userInfo = array("nickname" => $row[0],
+                        "profileImage" => $row[1],
+                        "checkingFishCount" => $row[2],
+                        "checkingFishTicket" => $row[3],
+                        "removeAdTicket" => $row[4],
+                        "type" => $row[5]);
 
       // ArrayList<Collection>
       $getCollectionQuery = "SELECT * FROM collection;";
