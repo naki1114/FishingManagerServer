@@ -4,8 +4,8 @@
 
   if ($connect) {
     // 연결 성공
-    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-      $nickname = $_GET['nickname'];
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $nickname = $_POST['nickname'];
 
       $deleteAccountQuery = "DELETE FROM collection WHERE nickname = '$nickname';
                              DELETE FROM history WHERE nickname = '$nickname';
