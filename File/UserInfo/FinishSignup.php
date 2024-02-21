@@ -25,7 +25,7 @@
               echo "unusableNickname";
             }
             else {
-              $saveUserInfoQuery = "INSERT INTO userInfo(id, password, nickname, checkingFishCount, checkingFishTicket, removeAdTicket, type) VALUES('$id', '$password', '$nickname', '3', '0', '0', 'FM');";
+              $saveUserInfoQuery = "INSERT INTO userInfo(id, password, nickname, profileImage, checkingFishCount, checkingFishTicket, removeAdTicket, type) VALUES('$id', '$password', '$nickname', 'FM', 3, 0, 0, 'FM');";
               $result = mysqli_query($connect, $saveUserInfoQuery);
               echo "usable";
             }
