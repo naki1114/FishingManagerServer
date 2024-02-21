@@ -26,8 +26,7 @@
       while ($row = mysqli_fetch_array($resultCollection)) {
         array_push($arrayCollection, array("nickname" => $row[0],
                                            "fishName" => $row[1],
-                                           "fishLength" => $row[2],
-                                           "date" => $row[3]));
+                                           "date" => $row[2]));
       }
 
       // ArrayList<History>
@@ -39,8 +38,7 @@
         array_push($arrayHistory, array("nickname" => $row[0],
                                         "fishName" => $row[1],
                                         "fishImage" => $row[2],
-                                        "fishLength" => $row[3],
-                                        "date" => $row[4]));
+                                        "date" => $row[3]));
       }
 
       $arrayHistory = array_reverse($arrayHistory);
