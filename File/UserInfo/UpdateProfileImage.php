@@ -15,25 +15,26 @@
   
         $profileImage = "Image/ProfileImage/".$_FILES['uploadFile']['name'];
   
-        $updateProfileImageQuery = "UPDATE userInfo SET profileImage = '$profileImage' WHERE nickname = '$nickname';
-                                    UPDATE feed SET profileImage = '$profileImage' WHERE nickname = '$nickname';
-                                    UPDATE history SET profileImage = '$profileImage' WHERE nickname = '$nickname';";
-        $resultUpdate = mysqli_multi_query($connect, $updateProfileImageQuery);
+        $updateProfileImageQuery = "UPDATE userInfo SET profileImage = '$profileImage' WHERE nickname = '$nickname';";
+        $resultUpdate = mysqli_query($connect, $updateProfileImageQuery);
+        $updateProfileImageQuery = "UPDATE feed SET profileImage = '$profileImage' WHERE nickname = '$nickname';";
+        $resultUpdate = mysqli_query($connect, $updateProfileImageQuery);
+        $updateProfileImageQuery = "UPDATE history SET profileImage = '$profileImage' WHERE nickname = '$nickname';";
+        $resultUpdate = mysqli_query($connect, $updateProfileImageQuery);
+
+        // UserInfo
+        $getUserInfoQuery = "SELECT nickname, profileImage, checkingFishCount, checkingFishTicket, removeAdTicket FROM userInfo WHERE nickname='$nickname';";
+        $resultUserInfo = mysqli_query($connect, $getUserInfoQuery);
+        $row = mysqli_fetch_assoc($resultUserInfo);
+        $userInfo = array("nickname" => $row['nickname'],
+                          "profileImage" => $row['profileImage'],
+                          "checkingFishCount" => $row['checkingFishCount'],
+                          "checkingFishTicket" => $row['checkingFishTicket'],
+                          "removeAdTicket" => $row['removeAdTicket']);
+
+        echo json_encode($userInfo, JSON_UNESCAPED_UNICODE);
   
       }
-
-      // UserInfo
-      $getUserInfoQuery = "SELECT nickname, profileImage, checkingFishCount, checkingFishTicket, removeAdTicket, type FROM userInfo WHERE nickname='$nickname';";
-      $resultUserInfo = mysqli_query($connect, $getUserInfoQuery);
-      $row = mysqli_fetch_array($resultUserInfo);
-      $userInfo = array("nickname" => $row[0],
-                        "profileImage" => $row[1],
-                        "checkingFishCount" => $row[2],
-                        "checkingFishTicket" => $row[3],
-                        "removeAdTicket" => $row[4],
-                        "type" => $row[5]);
-
-      echo json_encode($userInfo, JSON_UNESCAPED_UNICODE);
 
     }
   }
