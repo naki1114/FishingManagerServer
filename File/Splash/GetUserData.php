@@ -36,26 +36,28 @@
 
       while ($row = mysqli_fetch_array($resultHistory)) {
         array_push($arrayHistory, array("nickname" => $row[0],
-                                        "fishName" => $row[1],
-                                        "fishImage" => $row[2],
-                                        "date" => $row[3]));
+                                        "profileImage" => $row[1],
+                                        "fishName" => $row[2],
+                                        "fishImage" => $row[3],
+                                        "date" => $row[4]));
       }
 
       $arrayHistory = array_reverse($arrayHistory);
 
       // ArrayList<Feed>
-      $getFeedQuery = "SELECT nickname, num, title, content, picture, viewCount, date FROM feed;";
+      $getFeedQuery = "SELECT nickname, profileImage, num, title, content, picture, viewCount, date FROM feed;";
       $resultFeed = mysqli_query($connect, $getFeedQuery);
       $arrayFeed = array();
 
       while ($row = mysqli_fetch_array($resultFeed)) {
-        array_push($arrayFeed, array("viewCount" => $row[5],
-                                     "feedNum" => $row[1],
-                                     "title" => $row[2],
-                                     "content" => $row[3],
-                                     "feedImage" => $row[4],
+        array_push($arrayFeed, array("viewCount" => $row[6],
+                                     "feedNum" => $row[2],
+                                     "title" => $row[3],
+                                     "content" => $row[4],
+                                     "feedImage" => $row[5],
                                      "nickname" => $row[0],
-                                     "date" => $row[6]));
+                                     "date" => $row[7],
+                                     "profileImage" => $row[1]));
       }
 
       rsort($arrayFeed);

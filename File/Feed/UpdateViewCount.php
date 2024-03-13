@@ -12,18 +12,19 @@
       $updateFeed = mysqli_query($connect, $updateViewCountQuery);
       
       // ArrayList<Feed>
-      $getFeedQuery = "SELECT nickname, num, title, content, picture, viewCount, date FROM feed;";
+      $getFeedQuery = "SELECT nickname, profileImage, num, title, content, picture, viewCount, date FROM feed;";
       $resultFeed = mysqli_query($connect, $getFeedQuery);
       $arrayFeed = array();
 
       while ($row = mysqli_fetch_array($resultFeed)) {
-        array_push($arrayFeed, array("nickname" => $row[0],
-                                     "feedNum" => $row[1],
-                                     "title" => $row[2],
-                                     "content" => $row[3],
-                                     "feedImage" => $row[4],
-                                     "viewCount" => $row[5],
-                                     "date" => $row[6]));
+        array_push($arrayFeed, array("viewCount" => $row[6],
+                                     "feedNum" => $row[2],
+                                     "title" => $row[3],
+                                     "content" => $row[4],
+                                     "feedImage" => $row[5],
+                                     "nickname" => $row[0],
+                                     "date" => $row[7],
+                                     "profileImage" => $row[1]));
       }
 
       $arrayFeed = array_reverse($arrayFeed);
