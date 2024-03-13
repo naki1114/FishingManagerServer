@@ -6,12 +6,13 @@
     // 연결 성공
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $nickname = $_POST['nickname'];
+      $type = $_POST['type'];
 
       $deleteAccountQuery = "DELETE FROM collection WHERE nickname = '$nickname';
                              DELETE FROM history WHERE nickname = '$nickname';
                              DELETE FROM comment WHERE nickname = '$nickname';
                              DELETE FROM feed WHERE nickname = '$nickname';
-                             DELETE FROM userInfo WHERE nickname = '$nickname';
+                             DELETE FROM userInfo WHERE nickname = '$nickname' AND type = '$type';
                              
                              SET @CNT = 0;
                              UPDATE feed SET num = @CNT := @CNT + 1;
