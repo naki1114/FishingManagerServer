@@ -9,6 +9,9 @@
       $fishName = $_POST['fish'];
       $date = $_POST['date'];
 
+      $fishCountQuery = "UPDATE userInfo SET checkingFishCount = checkingFishCount - 1 WHERE nickname = '$nickname';";
+      $resultFishCountQuery = mysqli_query($connect, $fishCountQuery);
+      
       $collectionCheckQuery = "SELECT * FROM collection WHERE nickname = '$nickname' AND fishName = '$fishName';";
       $resultCheck = mysqli_query($connect, $collectionCheckQuery);
 
@@ -32,6 +35,28 @@
   
       }
       
+      // UserInfo
+      $getUserInfoQuery = "SELECT nickname, profileImage, checkingFishCount, checkingFishTicket, removeAdTicket, type FROM userInfo WHERE nickname='$nickname';";
+      $resultUserInfo = mysqli_query($connect, $getUserInfoQuery);
+      $row = mysqli_fetch_array($resultUserInfo);
+      $userInfo = array("nickname" => $row[0],
+                        "profileImage" => $row[1],
+                        "checkingFishCount" => $row[2],
+                        "checkingFishTicket" => $row[3],
+                        "removeAdTicket" => $row[4],
+                        "type" => $row[5]);
+
+      // ArrayList<Collection>
+      $getCollectionQuery = "SELECT * FROM collection;";
+      $resultCollection = mysqli_query($connect, $getCollectionQuery);
+      $arrayCollection = array();
+
+      while ($row = mysqli_fetch_array($resultCollection)) {
+        array_push($arrayCollection, array("nickname" => $row[0],
+                                          "fishName" => $row[1],
+                                          "date" => $row[2]));
+      }
+
       // ArrayList<History>
       $getHistoryQuery = "SELECT * FROM history;";
       $resultHistory = mysqli_query($connect, $getHistoryQuery);
@@ -46,7 +71,27 @@
 
       $arrayHistory = array_reverse($arrayHistory);
 
-      echo json_encode($arrayFeed, JSON_UNESCAPED_UNICODE);
+      // ArrayList<Feed>
+      $getFeedQuery = "SELECT nickname, num, title, content, picture, viewCount, date FROM feed;";
+      $resultFeed = mysqli_query($connect, $getFeedQuery);
+      $arrayFeed = array();
+
+      while ($row = mysqli_fetch_array($resultFeed)) {
+        array_push($arrayFeed, array("viewCount" => $row[5],
+                                    "feedNum" => $row[1],
+                                    "title" => $row[2],
+                                    "content" => $row[3],
+                                    "feedImage" => $row[4],
+                                    "nickname" => $row[0],
+                                    "date" => $row[6]));
+      }
+
+      rsort($arrayFeed);
+
+      echo json_encode(array("userInfo" => $userInfo,
+                            "collection" => $arrayCollection,
+                            "history" => $arrayHistory,
+                            "feed" => $arrayFeed), JSON_UNESCAPED_UNICODE);
 
     }
 
