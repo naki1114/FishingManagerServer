@@ -6,6 +6,7 @@
     // 연결 성공
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $nickname = $_POST['nickname'];
+      $profileImage = $_POST['profileImage'];
       $fishName = $_POST['fish'];
       $date = $_POST['date'];
 
@@ -30,7 +31,7 @@
   
         $fishImage = "Image/CheckingFishImage/".$_FILES['uploadFile']['name'];
   
-        $insertHistoryQuery = "INSERT INTO history(nickname, fishName, fishImage, date) VALUES('$nickname', '$fishName', '$fishImage', '$date');";
+        $insertHistoryQuery = "INSERT INTO history(nickname, profileImage, fishName, fishImage, date) VALUES('$nickname', '$profileImage', '$fishName', '$fishImage', '$date');";
         $resultHistory = mysqli_query($connect, $insertHistoryQuery);
   
       }
