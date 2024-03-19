@@ -6,13 +6,9 @@
     // 연결 성공
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $nickname = $_POST['nickname'];
+      $profileImage = $_POST['profileImage'];
       $fishName = $_POST['fish'];
       $date = $_POST['date'];
-
-      $getProfileImageQuery = "SELECT profileImage FROM userInfo WHERE nickname = '$nickname';";
-      $resultQuery = mysqli_query($connect, $getProfileImageQuery);
-      $row = mysqli_fetch_array($resultQuery);
-      $profileImage = $row[0];
 
       $fishCountQuery = "UPDATE userInfo SET checkingFishCount = checkingFishCount - 1 WHERE nickname = '$nickname';";
       $resultFishCountQuery = mysqli_query($connect, $fishCountQuery);
