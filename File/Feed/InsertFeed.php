@@ -10,6 +10,11 @@
       $content = $_POST['content'];
       $date = $_POST['date'];
 
+      $getProfileImageQuery = "SELECT profileImage FROM userInfo WHERE nickname = '$nickname';";
+      $resultQuery = mysqli_query($connect, $getProfileImageQuery);
+      $row = mysqli_fetch_array($resultQuery);
+      $profileImage = $row[0];
+
       if ($_FILES) {
 
         $uploadDir = '../../Image/FeedImage/';
@@ -18,13 +23,13 @@
   
         $picture = "Image/FeedImage/".$_FILES['uploadFile']['name'];
   
-        $insertFeedQuery = "INSERT INTO feed(nickname, title, content, picture, viewCount, date) VALUES('$nickname', '$title', '$content', '$picture', 0, '$date');";
+        $insertFeedQuery = "INSERT INTO feed(nickname, profileImage, title, content, picture, viewCount, date) VALUES('$nickname', '$profileImage', '$title', '$content', '$picture', 0, '$date');";
         $resultFeed = mysqli_query($connect, $insertFeedQuery);
   
       }
       else {
         
-        $insertFeedQuery = "INSERT INTO feed(nickname, title, content, viewCount, date) VALUES('$nickname', '$title', '$content', 0, '$date');";
+        $insertFeedQuery = "INSERT INTO feed(nickname, profileImage, title, content, viewCount, date) VALUES('$nickname', '$profileImage', '$title', '$content', 0, '$date');";
         $resultFeed = mysqli_query($connect, $insertFeedQuery);
   
       }
