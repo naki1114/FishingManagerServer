@@ -4,6 +4,19 @@
 
   if ($connect) {
     // 연결 성공
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $id = $_POST['id'];
+      $password = $_POST['password'];
+
+      if ($id) {
+
+        $updatePasswordQuery = "UPDATE userInfo SET password = '$password' WHERE id = '$id';";
+        $result = mysqli_query($connect, $updatePasswordQuery);
+
+        echo "successful";
+
+      }
+    }
   }
   else {
     // 연결 실패
