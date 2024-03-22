@@ -1,4 +1,3 @@
-!#/usr/bin/php -q
 <?php
   // 서버 연결
   include_once '../ConnectServer.php';
