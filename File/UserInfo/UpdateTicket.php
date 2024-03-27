@@ -9,11 +9,11 @@
       $product = $_POST['product'];
 
       if ($product == "어종 확인 한 달 이용권") {
-        $ticketQuery = "UPDATE userInfo SET checkingFishTicket = 30 WHERE nickname = '$nickname';";
+        $ticketQuery = "UPDATE userInfo SET checkingFishTicket = checkingFishTicket + 30 WHERE nickname = '$nickname';";
         $result = mysqli_query($connect, $ticketQuery);
       }
       elseif ($product == "어종 확인 일 년 이용권") {
-        $ticketQuery = "UPDATE userInfo SET checkingFishTicket = 365 WHERE nickname = '$nickname';";
+        $ticketQuery = "UPDATE userInfo SET checkingFishTicket = checkingFishTicket + 365 WHERE nickname = '$nickname';";
         $result = mysqli_query($connect, $ticketQuery);
       }
       
